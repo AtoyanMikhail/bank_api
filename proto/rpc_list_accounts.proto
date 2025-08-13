@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/AtoyanMikhail/bank_api/pb";
+import "account.proto";
+
+message ListAccountsRequest {
+  int32 page_id = 1;
+  int32 page_size = 2;
+}
+
+message ListAccountsResponse {
+  repeated Account accounts = 1;
+}
