@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package pb;
+
+import "user.proto";
+import "google/api/field_behavior.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/AtoyanMikhail/bank_api/pb";
+
+message CreateUserRequest {
+  string username = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Unique username for the account (alphanumeric only)";
+      min_length: 1;
+      max_length: 50;
+      pattern: "^[a-zA-Z0-9_]+$";
+      example: "\"john_doe\"";
+    }
+  ];
+
+  string full_name = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "User's full name";
+      example: "\"John Doe\"";
+    }
+  ];
+
+  string email = 3 [
+    (google.api.field_behavior) = REQUIRED,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Valid email address";
+      example: "\"john.doe@example.com\"";
+    }
+  ];
+
+  string password = 4 [
+    (google.api.field_behavior) = REQUIRED,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Password (minimum 6 characters)";
+      min_length: 6;
+    }
+  ];
+}
+
+message CreateUserResponse {
+  User user = 1 [
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Created user information";
+    }
+  ];
+}

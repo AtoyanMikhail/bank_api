@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/AtoyanMikhail/bank_api/pb";
+
+message GetAccountRequest {
+  int64 id = 1;
+}
+
+message GetAccountResponse {
+  int64 id = 1;
+  string owner = 2;
+  double balance = 3;
+  string currency = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
